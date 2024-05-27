@@ -1,5 +1,5 @@
 use std::io;
-use html5tokenizer::{Tokenizer, Token};
+use html5tokenizer::{NaiveParser, Token};
 
 fn main() {
     let mut html = String::from("");
@@ -14,7 +14,7 @@ fn main() {
             }
         }
 
-    for token in Tokenizer::new(html.as_str()).infallible(){
+    for token in NaiveParser::new(html.as_str()).flatten(){
         match token{
             Token::Comment(comment) => {
                 println!("{}",comment.replace("\n"," ").trim());
